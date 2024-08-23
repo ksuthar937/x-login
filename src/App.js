@@ -1,24 +1,62 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
 
 function App() {
+  const [{ username, password }, setCredentials] = useState({
+    username: "",
+    password: "",
+  });
+
+  const [valid, setValid] = useState(false);
+  const [invalid, setInvalid] = useState(false);
+
+  const handleCredentials = (e) => {
+    setCredentials((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (password !== "password" || username !== "username") {
+      setInvalid(true);
+    } else {
+      setInvalid(false);
+      setValid(true);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <h1>Login Page</h1>
+      {invalid && <p className="error">Invalid username or password</p>}
+      {valid ? (
+        <p>Welcome, user!</p>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="username">Username:</label>
+            <input
+              name="username"
+              type="text"
+              placeholder="username"
+              value={username}
+              onChange={handleCredentials}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="password">Password:</label>
+            <input
+              name="password"
+              type="password"
+              placeholder="password"
+              value={password}
+              onChange={handleCredentials}
+              required
+            />
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      )}
+    </main>
   );
 }
 
