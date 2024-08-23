@@ -15,7 +15,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password !== "password" || username !== "username") {
+    if (password !== "password" || username !== "user") {
       setInvalid(true);
     } else {
       setInvalid(false);
