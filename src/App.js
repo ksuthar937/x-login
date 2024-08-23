@@ -28,7 +28,7 @@ function App() {
       <h1>Login Page</h1>
       {invalid && <p className="error">Invalid username or password</p>}
       {valid ? (
-        <p>Welcome, user!</p>
+        <p>Welcome, user</p>
       ) : (
         <form onSubmit={handleSubmit}>
           <div>
